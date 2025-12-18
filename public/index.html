@@ -11,39 +11,7 @@
     <title>jordan-encrypt-decrypt</title>
     </head>
     <body>
-                                                                                <section class="card card-form modern" id="encryptCard">
-                                            <div class="card-art">
-                                                <div class="icon-circle encrypt">🔐</div>
-                                                <div class="art-caption">Securely transform text</div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="card-row">
-                                                    <div class="col left">
-                                                        <label class="field-label">Plaintext</label>
-                                                        <textarea id="encryptInput" placeholder="Type text to encrypt..."></textarea>
 
-                                                        <label class="field-label small">Password (optional)</label>
-                                                        <input id="encryptPassword" placeholder="Optional password to protect output" />
-
-                                                        <div class="actions">
-                                                            <button id="encryptBtn" class="btn btn-primary big">⚡ Encrypt</button>
-                                                            <small class="hint">Press Enter inside the input to submit</small>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col right">
-                                                        <label class="field-label">Encrypted Result</label>
-                                                        <div class="output-panel">
-                                                            <textarea id="encryptOutput" readonly placeholder="Encrypted text will appear here..."></textarea>
-                                                            <div class="output-tools">
-                                                                <button id="copyEncryptBtn" class="btn btn-ghost">Copy</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="meta-note">The copy button exports full metadata for reliable decryption.</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
             <div class="header-content">
                 <h1>
                     <span class="material-icons" aria-hidden="true">shield</span>
@@ -78,39 +46,6 @@
                           </linearGradient>
                         </defs>
                         <rect x="8" y="8" width="204" height="144" rx="14" fill="url(#g1)" opacity="0.12" />
-                                </section>
-                                <section class="card card-form modern alt" id="decryptCard">
-                                    <div class="card-art">
-                                        <div class="icon-circle decrypt">🗝️</div>
-                                        <div class="art-caption">Reveal original message</div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-row reverse">
-                                            <div class="col left">
-                                                <label class="field-label">Encrypted Input</label>
-                                                <textarea id="decryptInput" placeholder="Paste encrypted text here..."></textarea>
-
-                                                <label class="field-label small">Password (if required)</label>
-                                                <input id="decryptPassword" placeholder="If the text requires a password, enter it here" />
-
-                                                <div class="actions">
-                                                    <button id="decryptBtn" class="btn btn-success big">🔑 Decrypt</button>
-                                                    <small class="hint">Supports raw or exported metadata formats.</small>
-                                                </div>
-                                            </div>
-
-                                            <div class="col right">
-                                                <label class="field-label">Decrypted Result</label>
-                                                <div class="output-panel">
-                                                    <textarea id="decryptOutput" readonly placeholder="Decrypted text will appear here..."></textarea>
-                                                    <div class="output-tools">
-                                                        <button id="copyDecryptBtn" class="btn btn-ghost">Copy</button>
-                                                    </div>
-                                                </div>
-                                                <div class="meta-note">If decryption fails, check network console for API response details.</div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </section>
                         <g transform="translate(30,20)">
                           <rect x="0" y="0" width="160" height="96" rx="10" fill="#fff" opacity="0.06" />
@@ -150,9 +85,75 @@
             </section>
 
             <!-- Side by Side Cards Container -->
-            <div class="cards-container">
-                <!-- (Replaced by modern two-column cards above) -->
-            </div>
+                        <div class="cards-container">
+                                <section class="card card-form modern" id="encryptCard" style="display:none;">
+                                    <div class="card-art">
+                                        <div class="icon-circle encrypt">🔐</div>
+                                        <div class="art-caption">Securely transform text</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-row">
+                                            <div class="col left">
+                                                <label class="field-label">Plaintext</label>
+                                                <textarea id="encryptInput" placeholder="Type text to encrypt..."></textarea>
+
+                                                <label class="field-label small">Password (optional)</label>
+                                                <input id="encryptPassword" placeholder="Optional password to protect output" />
+
+                                                <div class="actions">
+                                                    <button id="encryptBtn" class="btn btn-primary big">⚡ Encrypt</button>
+                                                    <small class="hint">Press Enter inside the input to submit</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col right">
+                                                <label class="field-label">Encrypted Result</label>
+                                                <div class="output-panel">
+                                                    <textarea id="encryptOutput" readonly placeholder="Encrypted text will appear here..."></textarea>
+                                                    <div class="output-tools">
+                                                        <button id="copyEncryptBtn" class="btn btn-ghost">Copy</button>
+                                                    </div>
+                                                </div>
+                                                <div class="meta-note">The copy button exports full metadata for reliable decryption.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="card card-form modern alt" id="decryptCard" style="display:none;">
+                                    <div class="card-art">
+                                        <div class="icon-circle decrypt">🗝️</div>
+                                        <div class="art-caption">Reveal original message</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-row reverse">
+                                            <div class="col left">
+                                                <label class="field-label">Encrypted Input</label>
+                                                <textarea id="decryptInput" placeholder="Paste encrypted text here..."></textarea>
+
+                                                <label class="field-label small">Password (if required)</label>
+                                                <input id="decryptPassword" placeholder="If the text requires a password, enter it here" />
+
+                                                <div class="actions">
+                                                    <button id="decryptBtn" class="btn btn-success big">🔑 Decrypt</button>
+                                                    <small class="hint">Supports raw or exported metadata formats.</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col right">
+                                                <label class="field-label">Decrypted Result</label>
+                                                <div class="output-panel">
+                                                    <textarea id="decryptOutput" readonly placeholder="Decrypted text will appear here..."></textarea>
+                                                    <div class="output-tools">
+                                                        <button id="copyDecryptBtn" class="btn btn-ghost">Copy</button>
+                                                    </div>
+                                                </div>
+                                                <div class="meta-note">If decryption fails, check network console for API response details.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                        </div>
 
             <!-- Status Message -->
             <div id="statusMessage" class="status-message"></div>

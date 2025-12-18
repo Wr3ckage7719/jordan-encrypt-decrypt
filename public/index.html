@@ -5,31 +5,143 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>jordan-encrypt-decrypt</title>
   <link rel="stylesheet" href="/styles.css">
+  <meta name="description" content="Generate keys, encrypt and decrypt with AES-GCM/AES-CBC (demo)" />
 </head>
 <body>
+  <header class="site-header">
+    <div class="site-header__left"> <span class="logo">jordan-encrypt-decrypt</span> </div>
+    <div class="site-header__center" id="breadcrumb" aria-hidden="true"></div>
+    <nav class="site-header__right">
+      <button id="helpBtn" aria-label="Help">Help</button>
+      <button id="aboutBtn" aria-label="About">About</button>
+      <button id="themeToggle" aria-label="Toggle theme">Theme</button>
+    </nav>
+  </header>
+
   <main>
-    <h1>jordan-encrypt-decrypt</h1>
+    <div class="tabs" role="tablist" aria-label="Main tabs">
+      <button role="tab" aria-selected="true" class="tab tab--active" data-target="generateCard" id="tab-generate">Generate Key</button>
+      <button role="tab" aria-selected="false" class="tab" data-target="encryptCard" id="tab-encrypt">Encrypt</button>
+      <button role="tab" aria-selected="false" class="tab" data-target="decryptCard" id="tab-decrypt">Decrypt</button>
+    </div>
 
-    <section>
-      <label>Key (hex):</label>
-      <input id="key" placeholder="Generate or paste a 64-char hex key" />
-      <button id="genKey">Generate Key</button>
+    <section class="cards">
+      <section class="card" id="generateCard" role="region" aria-labelledby="tab-generate">
+        <header class="card__header"><h2>Generate Key</h2></header>
+        <div class="card__body two-column">
+          <form id="generateForm" class="form" aria-describedby="generateHelp">
+            <div class="form-row">
+              <label for="algorithm">Algorithm</label>
+              <select id="algorithm" class="input">
+                <option>AES-GCM</option>
+                <option>AES-CBC (edu)</option>
+                <option>Classical</option>
+              </select>
+              <small id="generateHelp">Choose algorithm and key size.</small>
+            </div>
+
+            <div class="form-row">
+              <label for="keySize">Key size</label>
+              <select id="keySize" class="input">
+                <option>128</option>
+                <option selected>256</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label><input type="checkbox" id="deriveToggle"> Derive key from passphrase</label>
+            </div>
+
+            <div class="form-row" id="passphraseRow" hidden>
+              <label for="passphrase">Passphrase</label>
+              <input id="passphrase" type="password" class="input" aria-describedby="passphraseHelp">
+              <small id="passphraseHelp">If checked, derive using PBKDF2 (100k iterations default).</small>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="generateBtn" class="btn btn--primary" data-test="generate-btn">Generate</button>
+            </div>
+          </form>
+
+          <aside class="result-panel" id="generateResult" aria-live="polite">
+            <label for="generatedKey">Key</label>
+            <div class="key-row">
+              <input id="generatedKey" readonly class="input" aria-label="Generated key" />
+              <button id="toggleKeyMask" aria-label="Show key">👁️</button>
+            </div>
+            <div class="meta" id="generatedMeta"></div>
+            <div class="result-actions">
+              <button id="copyKeyBtn">Copy key</button>
+              <button id="downloadKeyBtn">Download</button>
+              <button id="useKeyBtn">Use key</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="card" id="encryptCard" role="region" aria-labelledby="tab-encrypt" hidden>
+        <header class="card__header"><h2>Encrypt</h2></header>
+        <div class="card__body two-column">
+          <form id="encryptForm" class="form">
+            <div class="form-row">
+              <label for="keyInput">Key</label>
+              <input id="keyInput" class="input" placeholder="Paste hex key or use generated key" data-test="key-input" />
+              <div class="small-actions"><button id="loadKeyBtn">Load file</button></div>
+            </div>
+
+            <div class="form-row">
+              <label for="plaintext">Plaintext</label>
+              <textarea id="plaintext" class="input" placeholder="Type text or drop a file"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="encryptBtn" class="btn btn--primary" data-test="encrypt-btn">Encrypt</button>
+            </div>
+          </form>
+
+          <aside class="result-panel" id="encryptResult" aria-live="polite">
+            <label for="ciphertextOutput">Ciphertext</label>
+            <textarea id="ciphertextOutput" readonly class="input"></textarea>
+            <div class="meta" id="encryptMeta"></div>
+            <div class="result-actions"><button id="copyCipherBtn">Copy</button><button id="downloadCipherBtn">Download</button><button id="verifyRoundtripBtn">Verify</button></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="card" id="decryptCard" role="region" aria-labelledby="tab-decrypt" hidden>
+        <header class="card__header"><h2>Decrypt</h2></header>
+        <div class="card__body two-column">
+          <form id="decryptForm" class="form">
+            <div class="form-row">
+              <label for="decKeyInput">Key</label>
+              <input id="decKeyInput" class="input" placeholder="Paste hex key or load" />
+            </div>
+
+            <div class="form-row">
+              <label for="ciphertextInput">Ciphertext</label>
+              <textarea id="ciphertextInput" class="input" placeholder="Paste ciphertext or drop file"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="decryptBtn" class="btn btn--primary" data-test="decrypt-btn">Decrypt</button>
+            </div>
+          </form>
+
+          <aside class="result-panel" id="decryptResult" aria-live="polite">
+            <label for="plaintextOutput">Plaintext</label>
+            <textarea id="plaintextOutput" readonly class="input"></textarea>
+            <div class="meta" id="decryptMeta"></div>
+            <div class="result-actions"><button id="copyPlainBtn">Copy</button><button id="downloadPlainBtn">Download</button></div>
+          </aside>
+        </div>
+      </section>
     </section>
-
-    <section>
-      <label>Plaintext</label>
-      <textarea id="plaintext"></textarea>
-      <button id="encrypt">Encrypt</button>
-    </section>
-
-    <section>
-      <label>Ciphertext</label>
-      <textarea id="ciphertext"></textarea>
-      <button id="decrypt">Decrypt</button>
-    </section>
-
-    <pre id="output"></pre>
   </main>
+
+  <div id="toasts" aria-live="polite" class="toasts"></div>
+
+  <footer class="site-footer"><small>Dev demo. Do not store secrets.</small></footer>
+
   <script src="/app.js"></script>
 </body>
 </html>

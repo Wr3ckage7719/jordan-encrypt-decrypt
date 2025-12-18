@@ -1,8 +1,33 @@
-body{font-family:Arial,Helvetica,sans-serif;line-height:1.4;margin:0;padding:1rem;background:#f7f7f8}
-main{max-width:700px;margin:0 auto;background:#fff;padding:1rem 1.5rem;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
-h1{margin-top:0}
-section{margin:0.75rem 0}
-textarea{width:100%;height:120px}
-input{width:100%;padding:0.5rem}
-button{margin-top:0.5rem;padding:0.5rem 0.75rem}
-pre{background:#222;color:#fff;padding:0.75rem;border-radius:4px;overflow:auto}
+:root{--bg:#f7f7f8;--card:#fff;--accent:#2563eb;--muted:#666}
+body{font-family:Inter,Arial,Helvetica,sans-serif;line-height:1.4;margin:0;padding:0;background:var(--bg);color:#111}
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--card);box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+.site-header__left .logo{font-weight:700}
+.tabs{display:flex;gap:0.5rem;padding:0.75rem;background:transparent}
+.tab{background:transparent;border:1px solid transparent;padding:0.5rem 0.75rem;border-radius:6px;cursor:pointer}
+.tab--active{background:var(--card);border-color:rgba(0,0,0,0.06);box-shadow:0 4px 14px rgba(37,99,235,0.06)}
+.cards{max-width:1100px;margin:1rem auto;padding:0 1rem}
+.card{background:var(--card);border-radius:8px;padding:1rem;margin-bottom:1rem;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.card__header h2{margin:0 0 0.5rem 0}
+.card__body{display:flex;gap:1rem}
+.two-column{display:flex;gap:1rem}
+.two-column .form{flex:1}
+.two-column .result-panel{width:380px}
+.form-row{margin-bottom:0.75rem}
+.input, textarea{width:100%;padding:0.5rem;border-radius:6px;border:1px solid #ddd}
+.btn{padding:0.5rem 0.75rem;border-radius:6px;border:1px solid #ccc;background:#fff}
+.btn--primary{background:var(--accent);color:#fff;border-color:transparent}
+.result-actions{margin-top:0.5rem;display:flex;gap:0.5rem}
+.meta{margin-top:0.5rem;color:var(--muted);font-size:0.9rem}
+.toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px}
+.toast{background:#111;color:#fff;padding:0.5rem 0.75rem;border-radius:6px}
+.site-footer{padding:0.75rem 1rem;text-align:center;color:var(--muted);font-size:0.9rem}
+
+@media (max-width: 1023px){
+	.two-column{flex-direction:column}
+	.two-column .result-panel{width:100%}
+}
+
+@media (max-width: 599px){
+	.site-header{padding:0.5rem}
+	.tab{padding:0.5rem}
+}

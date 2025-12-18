@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Encrypt and decrypt data using multiple encryption methods">
-                                                Encrypt
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-                                        <section class="card card-form modern" id="encryptCard">
+        <!-- Fonts & Icons -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="./styles.css" rel="stylesheet">
+    <title>jordan-encrypt-decrypt</title>
+    </head>
+    <body>
+                                                                                <section class="card card-form modern" id="encryptCard">
                                             <div class="card-art">
                                                 <div class="icon-circle encrypt">🔐</div>
                                                 <div class="art-caption">Securely transform text</div>
@@ -49,8 +53,6 @@
                     <span class="material-icons" aria-hidden="true">dark_mode</span>
                 </button>
             </div>
-                                                Decrypt
-
         <a id="backToLanding" class="back-link" style="display:none;">← Back to choices</a>
 
         <!-- Landing Selector (unique hero) -->
@@ -149,77 +151,7 @@
 
             <!-- Side by Side Cards Container -->
             <div class="cards-container">
-                <!-- Encryption Section -->
-                <section class="card side-card">
-                    <h2 class="section-title">
-                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        Encryption
-                    </h2>
-                    
-                    <label for="encryptInput" class="label">Type your text here:</label>
-                    <textarea 
-                        id="encryptInput" 
-                        class="textarea" 
-                        placeholder="Type your text here..."
-                        rows="5"
-                    ></textarea>
-
-                    <label for="encryptPassword" class="label">Optional password (encrypt):</label>
-                    <input id="encryptPassword" class="text-input" type="password" placeholder="Optional password to protect output">
-                    
-                    <button id="encryptBtn" class="btn btn-primary full-width"><span class="material-icons">bolt</span> Encrypt</button>
-                    
-                    <div class="output-section">
-                        <label for="encryptOutput" class="label">Encrypted Output:</label>
-                        <textarea 
-                            id="encryptOutput" 
-                            class="textarea output-textarea" 
-                            placeholder="Encrypted text will appear here..."
-                            rows="5"
-                            readonly
-                        ></textarea>
-                        <button id="copyEncryptBtn" class="btn btn-secondary"><span class="material-icons">content_copy</span> Copy</button>
-                    </div>
-                </section>
-
-                <!-- Decryption Section -->
-                <section class="card side-card">
-                    <h2 class="section-title">
-                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Decryption
-                    </h2>
-                    
-                    <label for="decryptInput" class="label">Paste encrypted text here:</label>
-                    <textarea 
-                        id="decryptInput" 
-                        class="textarea" 
-                        placeholder="Paste encrypted text here..."
-                        rows="5"
-                    ></textarea>
-
-                    <label for="decryptPassword" class="label">Optional password (decrypt):</label>
-                    <input id="decryptPassword" class="text-input" type="password" placeholder="If the text requires a password, enter it here">
-                    
-                    <button id="decryptBtn" class="btn btn-success full-width"><span class="material-icons">key</span> Decrypt</button>
-                    
-                    <div class="output-section">
-                        <label for="decryptOutput" class="label">Decrypted Output:</label>
-                        <textarea 
-                            id="decryptOutput" 
-                            class="textarea output-textarea" 
-                            placeholder="Decrypted text will appear here..."
-                            rows="5"
-                            readonly
-                        ></textarea>
-                        <button id="copyDecryptBtn" class="btn btn-secondary"><span class="material-icons">content_copy</span> Copy</button>
-                    </div>
-                </section>
+                <!-- (Replaced by modern two-column cards above) -->
             </div>
 
             <!-- Status Message -->

@@ -90,21 +90,40 @@ document.getElementById('encryptBtn').addEventListener('click', async () => {
   const algorithm = 'AES-GCM';
   const res = await postJson('/api/encrypt', { text, key, algorithm });
   if (res.error) { toast(res.error, { persistent: true }); document.getElementById('encryptMeta').textContent = res.details || ''; return; }
-  // Present encrypt output as JSON including iv/tag so it can be pasted back for decryption
+  // Show only the raw ciphertext in the textarea (user asked for raw view)
+  document.getElementById('ciphertextOutput').value = res.ciphertext || '';
+  // keep metadata visible and stored for actions (copy JSON, verify)
   const exportObj = { ciphertext: res.ciphertext, iv: res.iv, tag: res.tag, meta: res.meta || { algorithm: 'AES-GCM' } };
-  document.getElementById('ciphertextOutput').value = JSON.stringify(exportObj, null, 2);
   document.getElementById('encryptMeta').textContent = JSON.stringify(exportObj.meta || {});
-  // store iv/tag for verify convenience
   document.getElementById('ciphertextOutput').dataset.iv = res.iv || '';
   document.getElementById('ciphertextOutput').dataset.tag = res.tag || '';
+  // remember last export for convenience
+  window.__lastEncryptExport = exportObj;
   toast('Encrypted');
 });
 
 document.getElementById('copyCipherBtn').addEventListener('click', async () => {
+  // Copy the full export (ciphertext + iv + tag + meta) so paste preserves metadata.
+  const last = window.__lastEncryptExport;
+  if (last) {
+    await navigator.clipboard.writeText(JSON.stringify(last, null, 2));
+    toast('Copied ciphertext + metadata');
+    return;
+  }
+  // Fallback: copy raw value
   const v = document.getElementById('ciphertextOutput').value;
-  // if JSON, copy prettified; otherwise copy raw
   await navigator.clipboard.writeText(v || '');
   toast('Copied ciphertext');
+});
+
+document.getElementById('downloadCipherBtn').addEventListener('click', () => {
+  const last = window.__lastEncryptExport;
+  const filename = `ciphertext-${new Date().toISOString().slice(0,10)}.json`;
+  const blob = new Blob([JSON.stringify(last || { ciphertext: document.getElementById('ciphertextOutput').value }, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  toast('Downloaded ciphertext');
 });
 
 document.getElementById('verifyRoundtripBtn').addEventListener('click', async () => {

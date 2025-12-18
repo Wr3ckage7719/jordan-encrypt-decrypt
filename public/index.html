@@ -1,170 +1,175 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>jordan-encrypt-decrypt</title>
-  <link rel="stylesheet" href="/styles.css">
-  <meta name="description" content="Generate keys, encrypt and decrypt with AES-GCM/AES-CBC (demo)" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encrypt and decrypt data using multiple encryption methods">
+    <title>jordan-encrypt-decrypt</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>jordan-encrypt-decrypt</title>
-      <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-      <header class="app-header">
-        <div class="brand">jordan-encrypt-decrypt</div>
-        <div class="header-actions">
-          <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
-        </div>
-      </header>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>
+                    <span class="material-icons" aria-hidden="true">shield</span>
+                    jordan-encrypt-decrypt
+                </h1>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="material-icons" aria-hidden="true">dark_mode</span>
+                </button>
+            </div>
+        </header>
 
-      <main class="container">
-        <section id="landing" class="landing">
-          <h2>Welcome</h2>
-          <p>Quickly encrypt or decrypt text using several simple methods.</p>
-          <div class="landing-actions">
-            <button id="chooseEncrypt" class="primary">Encrypt</button>
-            <button id="chooseDecrypt" class="secondary">Decrypt</button>
-          </div>
+        <a id="backToLanding" class="back-link" style="display:none;">← Back to choices</a>
+
+        <!-- Landing Selector -->
+        <section id="landing" class="card landing-card">
+            <h2 class="section-title">Choose an action</h2>
+            <div class="landing-actions">
+                 <button id="chooseEncrypt" class="btn btn-primary"><span class="material-icons">bolt</span> Encrypt text</button>
+                 <button id="chooseDecrypt" class="btn btn-success"><span class="material-icons">input</span> Decrypt text</button>
+            </div>
         </section>
 
-        <a id="backToLanding" class="link back" style="display:none;">← Back</a>
+        <main class="main-content" style="display:none;">
+            <!-- Method Selection -->
+            <section class="card method-card">
+                <h2 class="section-title">Encryption Method</h2>
+                <div class="method-selector">
+                    <select id="methodSelect" class="select-input">
+                        <option value="caesar">Caesar Cipher (Shift by 3)</option>
+                        <option value="reverse">Reverse Text</option>
+                        <option value="base64">Base64 Encoding</option>
+                        <option value="hex">Hexadecimal Encoding</option>
+                        <option value="morse">Morse Code</option>
+                        <option value="binary">Binary (8-bit)</option>
+                        <option value="atbash">Atbash Cipher</option>
+                        <option value="rot13">ROT13 Cipher</option>
+                    </select>
+                </div>
+                <div id="methodInfo" class="method-info">
+                    <p>Encodes text in Base64 format - commonly used for data transfer.</p>
+                </div>
+            </section>
 
-        <div class="main-content" style="display:none;">
-          <div class="controls">
-            <label for="methodSelect">Method</label>
-            <select id="methodSelect">
-              <option value="caesar">Caesar</option>
-              <option value="reverse">Reverse</option>
-              <option value="base64">Base64</option>
-              <option value="hex">Hex</option>
-              <option value="binary">Binary</option>
-              <option value="rot13">ROT13</option>
-              <option value="atbash">Atbash</option>
-            </select>
-            <div id="methodInfo" class="method-info"></div>
-          </div>
+            <!-- Side by Side Cards Container -->
+            <div class="cards-container">
+                <!-- Encryption Section -->
+                <section class="card side-card">
+                    <h2 class="section-title">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Encryption
+                    </h2>
+                    
+                    <label for="encryptInput" class="label">Type your text here:</label>
+                    <textarea 
+                        id="encryptInput" 
+                        class="textarea" 
+                        placeholder="Type your text here..."
+                        rows="5"
+                    ></textarea>
 
-          <div class="card">
-            <h3>Encrypt</h3>
-            <textarea id="encryptInput" rows="4" placeholder="Enter plaintext to encrypt"></textarea>
-            <div class="row small">
-              <input id="encryptPassword" placeholder="Optional password (wrap)" />
-              <button id="encryptBtn" class="primary">Encrypt</button>
-            </div>
-            <textarea id="encryptOutput" rows="6" placeholder="Ciphertext output (copied separately)"></textarea>
-            <div class="row small">
-              <button id="copyEncryptBtn">Copy</button>
-            </div>
-          </div>
+                    <label for="encryptPassword" class="label">Optional password (encrypt):</label>
+                    <input id="encryptPassword" class="text-input" type="password" placeholder="Optional password to protect output">
+                    
+                    <button id="encryptBtn" class="btn btn-primary full-width">
+                        <button id="encryptBtn" class="btn btn-primary full-width"><span class="material-icons">bolt</span> Encrypt</button>
+                    </button>
+                    
+                    <div class="output-section">
+                        <label for="encryptOutput" class="label">Encrypted Output:</label>
+                        <textarea 
+                            id="encryptOutput" 
+                            class="textarea output-textarea" 
+                            placeholder="Encrypted text will appear here..."
+                            rows="5"
+                            readonly
+                        ></textarea>
+                        <button id="copyEncryptBtn" class="btn btn-secondary">
+                            <button id="copyEncryptBtn" class="btn btn-secondary"><span class="material-icons">content_copy</span> Copy</button>
+                        </button>
+                    </div>
+                </section>
 
-          <div class="card">
-            <h3>Decrypt</h3>
-            <textarea id="decryptInput" rows="4" placeholder="Paste ciphertext (or wrapped payload)"></textarea>
-            <div class="row small">
-              <input id="decryptPassword" placeholder="Optional password for wrapped payload" />
-              <button id="decryptBtn" class="primary">Decrypt</button>
+                <!-- Decryption Section -->
+                <section class="card side-card">
+                    <h2 class="section-title">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Decryption
+                    </h2>
+                    
+                    <label for="decryptInput" class="label">Paste encrypted text here:</label>
+                    <textarea 
+                        id="decryptInput" 
+                        class="textarea" 
+                        placeholder="Paste encrypted text here..."
+                        rows="5"
+                    ></textarea>
+
+                    <label for="decryptPassword" class="label">Optional password (decrypt):</label>
+                    <input id="decryptPassword" class="text-input" type="password" placeholder="If the text requires a password, enter it here">
+                    
+                    <button id="decryptBtn" class="btn btn-success full-width">
+                        <button id="decryptBtn" class="btn btn-success full-width"><span class="material-icons">key</span> Decrypt</button>
+                    </button>
+                    
+                    <div class="output-section">
+                        <label for="decryptOutput" class="label">Decrypted Output:</label>
+                        <textarea 
+                            id="decryptOutput" 
+                            class="textarea output-textarea" 
+                            placeholder="Decrypted text will appear here..."
+                            rows="5"
+                            readonly
+                        ></textarea>
+                        <button id="copyDecryptBtn" class="btn btn-secondary">
+                            <button id="copyDecryptBtn" class="btn btn-secondary"><span class="material-icons">content_copy</span> Copy</button>
+                        </button>
+                    </div>
+                </section>
             </div>
-            <textarea id="decryptOutput" rows="6" placeholder="Decrypted text will appear here"></textarea>
-            <div class="row small">
-              <button id="copyDecryptBtn">Copy</button>
+
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 Encryption Tool</p>
+        </footer>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <h3>Protected Text Detected</h3>
+            <p>This text appears to be password-protected. Enter the password to continue.</p>
+            <input id="modalPasswordInput" type="password" class="text-input" placeholder="Enter password">
+            <div class="modal-actions">
+                <button id="modalCancel" class="btn btn-secondary">Cancel</button>
+                <button id="modalConfirm" class="btn btn-primary">Confirm</button>
             </div>
-          </div>
         </div>
-      </main>
+    </div>
 
-      <div id="passwordModal" class="modal" aria-hidden="true">
-        <div class="modal-inner">
-          <h4>Enter password</h4>
-          <input id="modalPasswordInput" placeholder="Password" />
-          <div class="row small">
-            <button id="modalConfirm" class="primary">Confirm</button>
-            <button id="modalCancel">Cancel</button>
-          </div>
-        </div>
-      </div>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
 
-      <div id="statusBar" class="status"></div>
-
-      <script src="utils.js"></script>
-      <script src="app.js"></script>
-    </body>
-  </html>
-              <button id="useKeyBtn">Use key</button>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="card" id="encryptCard" role="region" aria-labelledby="tab-encrypt" hidden>
-        <header class="card__header"><h2>Encrypt</h2></header>
-        <div class="card__body two-column">
-          <form id="encryptForm" class="form">
-            <div class="form-row">
-              <label for="keyInput">Key</label>
-              <input id="keyInput" class="input" placeholder="Paste hex key or use generated key" data-test="key-input" />
-              <div class="small-actions"><button id="loadKeyBtn">Load file</button></div>
-            </div>
-
-            <div class="form-row">
-              <label for="plaintext">Plaintext</label>
-              <textarea id="plaintext" class="input" placeholder="Type text or drop a file"></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" id="encryptBtn" class="btn btn--primary" data-test="encrypt-btn">Encrypt</button>
-            </div>
-          </form>
-
-          <aside class="result-panel" id="encryptResult" aria-live="polite">
-            <label for="ciphertextOutput">Ciphertext</label>
-            <textarea id="ciphertextOutput" readonly class="input"></textarea>
-            <div class="meta" id="encryptMeta"></div>
-            <div class="result-actions"><button id="copyCipherBtn">Copy</button><button id="downloadCipherBtn">Download</button><button id="verifyRoundtripBtn">Verify</button></div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="card" id="decryptCard" role="region" aria-labelledby="tab-decrypt" hidden>
-        <header class="card__header"><h2>Decrypt</h2></header>
-        <div class="card__body two-column">
-          <form id="decryptForm" class="form">
-            <div class="form-row">
-              <label for="decKeyInput">Key</label>
-              <input id="decKeyInput" class="input" placeholder="Paste hex key or load" />
-            </div>
-
-            <div class="form-row">
-              <label for="ciphertextInput">Ciphertext</label>
-              <textarea id="ciphertextInput" class="input" placeholder="Paste ciphertext or drop file"></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" id="decryptBtn" class="btn btn--primary" data-test="decrypt-btn">Decrypt</button>
-            </div>
-          </form>
-
-          <aside class="result-panel" id="decryptResult" aria-live="polite">
-            <label for="plaintextOutput">Plaintext</label>
-            <textarea id="plaintextOutput" readonly class="input"></textarea>
-            <div class="meta" id="decryptMeta"></div>
-            <div class="result-actions"><button id="copyPlainBtn">Copy</button><button id="downloadPlainBtn">Download</button></div>
-          </aside>
-        </div>
-      </section>
-    </section>
-  </main>
-
-  <div id="toasts" aria-live="polite" class="toasts"></div>
-
-  <footer class="site-footer"><small>Dev demo. Do not store secrets.</small></footer>
-
-  <script src="/app.js"></script>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

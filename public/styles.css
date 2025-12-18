@@ -1,25 +1,24 @@
 /* CSS Variables for Theming */
 :root {
-    --bg: #0f1724;
-    --card: #0b1220;
-    --muted: #9aa4b2;
-    --accent: #6ee7b7;
-    --text: #e6eef6;
-    --glass: rgba(255,255,255,0.03);
-}
+    /* Light-mode palette (single theme only) */
+    --bg-primary: #f7fafc; /* page background */
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #0b1220;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
 
-[data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-card: #1e293b;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
+    --border-color: #e6eef6;
+    --shadow: rgba(2,6,23,0.06);
 
-    /* ---------- New design styles (no JS IDs changed) ---------- */
+    --accent-primary: #1d4ed8; /* strong blue */
+    --accent-hover: #1e40af;
+    --accent-success: #059669; /* strong green */
+    --accent-success-hover: #047857;
+    --accent-warning: #d97706;
+    --accent-danger: #dc2626;
 
-    --border-color: #334155;
-    --shadow: rgba(0, 0, 0, 0.3);
+    --content-max-width: 880px;
 }
 
 /* Reset & Base Styles */
@@ -220,6 +219,9 @@ body {
     transform: scale(1.1);
     opacity: 1;
 }
+
+/* hide theme toggle — single light theme enforced */
+.theme-toggle { display: none !important; }
 
 /* Main Content */
 .main-content {
@@ -423,32 +425,34 @@ body {
 }
 
 .btn-primary {
-    background: var(--accent-primary);
-    color: white;
+    background: linear-gradient(180deg, var(--accent-primary), var(--accent-hover));
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(29,78,216,0.18);
+    border: 1px solid rgba(13,42,148,0.12);
 }
 
 .btn-primary:hover {
-    background: var(--accent-hover);
+    transform: translateY(-1px);
 }
 
 .btn-success {
-    background: var(--accent-success);
-    color: white;
+    background: linear-gradient(180deg, var(--accent-success), var(--accent-success-hover));
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(5,150,105,0.12);
+    border: 1px solid rgba(4,120,87,0.08);
 }
 
-.btn-success:hover {
-    background: var(--accent-success-hover);
-}
+.btn-success:hover { transform: translateY(-1px); }
 
 .btn-secondary {
     background: transparent;
     color: var(--text-primary);
-    border: 2px solid var(--border-color);
+    border: 2px solid rgba(15,20,32,0.06);
+    backdrop-filter: blur(4px);
 }
 
 .btn-secondary:hover {
-    background: var(--bg-primary);
-    border-color: var(--text-muted);
+    background: rgba(15,20,32,0.02);
 }
 
 /* Action Section */

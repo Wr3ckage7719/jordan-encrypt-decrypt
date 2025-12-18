@@ -90,9 +90,11 @@ document.getElementById('encryptBtn').addEventListener('click', async () => {
   const algorithm = 'AES-GCM';
   const res = await postJson('/api/encrypt', { text, key, algorithm });
   if (res.error) { toast(res.error, { persistent: true }); document.getElementById('encryptMeta').textContent = res.details || ''; return; }
-  document.getElementById('ciphertextOutput').value = res.ciphertext;
-  document.getElementById('encryptMeta').textContent = JSON.stringify(res.meta || { iv: res.iv, tag: res.tag });
-  // store iv/tag for verify
+  // Present encrypt output as JSON including iv/tag so it can be pasted back for decryption
+  const exportObj = { ciphertext: res.ciphertext, iv: res.iv, tag: res.tag, meta: res.meta || { algorithm: 'AES-GCM' } };
+  document.getElementById('ciphertextOutput').value = JSON.stringify(exportObj, null, 2);
+  document.getElementById('encryptMeta').textContent = JSON.stringify(exportObj.meta || {});
+  // store iv/tag for verify convenience
   document.getElementById('ciphertextOutput').dataset.iv = res.iv || '';
   document.getElementById('ciphertextOutput').dataset.tag = res.tag || '';
   toast('Encrypted');
@@ -100,16 +102,25 @@ document.getElementById('encryptBtn').addEventListener('click', async () => {
 
 document.getElementById('copyCipherBtn').addEventListener('click', async () => {
   const v = document.getElementById('ciphertextOutput').value;
+  // if JSON, copy prettified; otherwise copy raw
   await navigator.clipboard.writeText(v || '');
   toast('Copied ciphertext');
 });
 
 document.getElementById('verifyRoundtripBtn').addEventListener('click', async () => {
   const key = document.getElementById('keyInput').value.trim();
-  const ciphertext = document.getElementById('ciphertextOutput').value;
-  const iv = document.getElementById('ciphertextOutput').dataset.iv;
-  const tag = document.getElementById('ciphertextOutput').dataset.tag;
-  if (!ciphertext) return toast('No ciphertext to verify');
+  const raw = document.getElementById('ciphertextOutput').value;
+  if (!raw) return toast('No ciphertext to verify');
+  // accept JSON export or raw base64
+  let ciphertext = raw, iv = '', tag = '';
+  try {
+    const parsed = JSON.parse(raw);
+    ciphertext = parsed.ciphertext || parsed.ct || ciphertext;
+    iv = parsed.iv || '';
+    tag = parsed.tag || '';
+  } catch (e) {
+    // not JSON — keep as-is
+  }
   const res = await postJson('/api/decrypt', { ciphertext, key, iv, tag, algorithm: 'AES-GCM' });
   if (res.error) { toast('Verify failed: ' + res.error, { persistent: true }); return; }
   toast('Roundtrip OK');

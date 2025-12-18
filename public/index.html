@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>jordan-encrypt-decrypt</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>jordan-encrypt-decrypt</h1>
+
+    <section>
+      <label>Key (hex):</label>
+      <input id="key" placeholder="Generate or paste a 64-char hex key" />
+      <button id="genKey">Generate Key</button>
+    </section>
+
+    <section>
+      <label>Plaintext</label>
+      <textarea id="plaintext"></textarea>
+      <button id="encrypt">Encrypt</button>
+    </section>
+
+    <section>
+      <label>Ciphertext</label>
+      <textarea id="ciphertext"></textarea>
+      <button id="decrypt">Decrypt</button>
+    </section>
+
+    <pre id="output"></pre>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

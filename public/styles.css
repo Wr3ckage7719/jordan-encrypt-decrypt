@@ -253,6 +253,31 @@ body {
     margin-bottom: 24px;
 }
 
+/* Modern two-column card for encrypt/decrypt */
+.card-form.modern { display: grid; grid-template-columns: 160px 1fr; gap: 20px; align-items: start; }
+.card-form.modern .card-art { text-align: center; padding-top: 8px; }
+.card-form.modern .icon-circle { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:36px; box-shadow: 0 6px 18px rgba(10,20,40,0.06); }
+.card-form.modern .icon-circle.encrypt { background: linear-gradient(135deg,#EAF3FF,#DDEBFF); color:#0B5FFF; }
+.card-form.modern .icon-circle.decrypt { background: linear-gradient(135deg,#E9FFF1,#DFF7EA); color:#008744; }
+.card-form.modern .art-caption { font-size:13px; color:var(--text-muted); }
+.card-form.modern .card-body { padding: 0; }
+.card-form.modern .card-row { display:flex; gap: 22px; }
+.card-form.modern .col { flex:1; }
+.card-form.modern .col.left { max-width:520px; }
+.card-form.modern .field-label { display:block; font-weight:600; margin-bottom:8px; color:var(--text-primary); }
+.card-form.modern .field-label.small { margin-top:12px; font-weight:500; color:var(--text-secondary); }
+.card-form.modern textarea { width:100%; min-height:120px; padding:12px; border-radius:10px; border:1px solid var(--border-color); background:var(--bg-primary); }
+.card-form.modern input[type="text"], .card-form.modern input[type="password"], .card-form.modern input { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-primary); }
+.card-form.modern .actions { margin-top:12px; display:flex; align-items:center; gap:12px; }
+.card-form.modern .hint { color:var(--text-secondary); font-size:12px; }
+.card-form.modern .output-panel { position:relative; }
+.card-form.modern .output-panel textarea { min-height:160px; font-family:inherit; }
+.card-form.modern .output-tools { position:absolute; top:8px; right:8px; }
+.card-form.modern .btn-ghost { background:transparent; border:1px dashed var(--border-color); padding:8px 12px; border-radius:8px; }
+.card-form.modern .meta-note { margin-top:10px; font-size:12px; color:var(--text-secondary); }
+.card-form.modern.alt { grid-template-columns: 160px 1fr; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); }
+.card-form.modern.reverse .card-row { flex-direction: row-reverse; }
+
 .section-title {
     font-size: 18px;
     font-weight: 600;
